@@ -32,48 +32,78 @@ encodes the `histone cluster 1, H1b.`_
     AAA GCC GCT AAG CCC AAA GCA GCA AAA CCT AAA GCT GCA AAG GCC AAG AAG
     GCG GCT GCC AAA AAG AAG TAG GAA GCT GGC GTG TGA AAA CCG CAA CAA AGC
     CCC AAA GGC TCT TTT CAG AGC CAC CCA
+    
+"""
 
 
-1)  In bioinformatics it is common to store the "coding" strand of DNA.  When
-    a gene is expressed, the first thing that happens is that a copy is made
-    of the sequence in messenger RNA (mRNA).  This sequence of mRNA is the
-    same as the sequence of coding DNA, except that the thymine bases have
-    been replaced by uracil bases.
 
-    Compute the equivalent mRNA sequence to the sequence in this example.
+#%%    
 
-    Hint: see if there is a string method that lets you _replace_ substrings.
+#1)  In bioinformatics it is common to store the "coding" strand of DNA.  When
+#    a gene is expressed, the first thing that happens is that a copy is made
+#    of the sequence in messenger RNA (mRNA).  This sequence of mRNA is the
+#    same as the sequence of coding DNA, except that the thymine bases have
+#    been replaced by uracil bases.
+#
+#    Compute the equivalent mRNA sequence to the sequence in this example.
+#
+#    Hint: see if there is a string method that lets you _replace_ substrings.
 
-2)  The other half of a DNA molecule is the "template" strand of the DNA.
-    This strand holds the other half of each base pair, so that:
+from string import maketrans
 
-    * adenine "A" is replaced by thymine "T"
-    * thymine "T" is replaced by adenine "A"
-    * cytosine "C" is replaced by guanine "G"
-    * guanine "G" is replaced by cytosine "C"
+f = open("genome.txt")
+indata = f.readlines()
+coding_seq = ''
+    
+for line in indata:
+    coding_seq += ''.join(line.split())
 
-    In addition, convention holds that the sequence is written in the reverse
-    order.
+coding_sequence = coding_seq.replace('T', 'U')
 
-    Compute the template DNA sequence which corresponds to the provided
-    sequence.
+print coding_sequence
 
-    Hint: Look at the documentation for the `translate` method on strings and
-    the `maketrans` function from the `string` module (which we have imported
-    for you).
+#%%
+#2)  The other half of a DNA molecule is the "template" strand of the DNA.
+#    This strand holds the other half of each base pair, so that:
+#
+#    * adenine "A" is replaced by thymine "T"
+#    * thymine "T" is replaced by adenine "A"
+#    * cytosine "C" is replaced by guanine "G"
+#    * guanine "G" is replaced by cytosine "C"
+#
+#    In addition, convention holds that the sequence is written in the reverse
+#    order.
+#
+#    Compute the template DNA sequence which corresponds to the provided
+#    sequence.
+#
+#    Hint: Look at the documentation for the `translate` method on strings and
+#    the `maketrans` function from the `string` module (which we have imported
+#    for you).
+#
+#    Hint 2: remember the how to use slicing to reverse a string
+#
+#    Question: why can't you use the same method you used in (1)?
 
-    Hint 2: remember the how to use slicing to reverse a string
 
-    Question: why can't you use the same method you used in (1)?
+coding_template = maketrans("ATCG", "TAGC")
 
-3)  A gene encodes a protein by specifying the amino acids that compose it via
-    groups of 3 bases (called "codons").  In the usual genetic code the
-    sequence "ATG" indicates the start of the encoding of the protein.
+newcoding_sequence = coding_sequence.translate(coding_template)[::-1]
 
-    Find the index of the start of the coding section of the sequence.
+print newcoding_sequence
+#%%
+#3)  A gene encodes a protein by specifying the amino acids that compose it via
+#    groups of 3 bases (called "codons").  In the usual genetic code the
+#    sequence "ATG" indicates the start of the encoding of the protein.
+#
+#    Find the index of the start of the coding section of the sequence.
+#
+#    Hint: look for a string method that helps you _find_ a substring.
+codex = coding_seq.find("ATG")
 
-    Hint: look for a string method that helps you _find_ a substring.
+print codex
 
+#%%
 4)  The end of the encoding of a protein is indicated by one of three "stop"
     codons: "TAA", "TAG" or "TGA".  In this case the stop is 'TAG'.  Find the
     'TAG' codon closest to the end of the sequence.

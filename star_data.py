@@ -24,22 +24,26 @@
 # 
 # Given the following string, containing one line from the file, extract each of the data items from the string.  You should strip extraneous whitespace and convert strings containing floating point numbers to Python floats.
 
+#%%
 
 star_string = "Proxima Centauri  M5  e      11.05 15.49 771.8"
+star_name = star_string[:16]
+spectral_class = star_string[17:27]
+apparent_magnitude = star_string[28:34]
+absolute_magnitude = star_string[34:40]
+parallax = star_string[40:]
 
 
+print "Star name:         ", star_name.strip()
+print "Spectral class:    ", spectral_class.strip()
+print "Apparent magnitude:", float(apparent_magnitude.strip())
+print "Absolute magnitude:", float(absolute_magnitude.strip())
+print "Parallax:          ", float(parallax.strip())
 
-# your code goes here
-
-
-
-print "Star name:         ", star_name
-print "Spectral class:    ", spectral_class
-print "Apparent magnitude:", apparent_magnitude
-print "Absolute magnitude:", absolute_magnitude
-print "Parallax:          ", parallax
+print()
 
 
+#%%
 # References
 # ----------
 # 
