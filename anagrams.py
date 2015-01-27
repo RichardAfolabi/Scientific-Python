@@ -50,7 +50,7 @@ def bingo_anagram(words_dict, bingo_size):
     return newlist
 
         
-            
+
 if __name__ == '__main__':
     anagwords = find_anagrams('words.txt')
     
