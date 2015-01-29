@@ -30,3 +30,32 @@ friends = {'julius': '100 via apian', 'cleopatra': '000 pyramid parkway'}
 romans = dict(brutus='234 via tratorium', cassius='111 aqueduct lane')
 countrymen = dict([('plebius','786 via bunius'), ('plebia', '786 via bunius')])
 
+# Names of all friends
+#print(friends.keys() + romans.keys() + countrymen.keys())
+
+#Addresses of all friends
+#print(friends.values() + romans.values() + countrymen.values())
+
+#Pairs of names and addresses
+all_friends = friends.items() + romans.items() + countrymen.items()
+print(all_friends)
+
+print(all_friends.pop(0) )
+
+#Dictionary of all
+friends_dict = dict(all_friends)
+print(friends_dict)
+
+#Cleopatra's address
+print(friends_dict['cleopatra'])
+
+friends_dict.pop('plebia')
+print(friends_dict)
+
+del friends_dict['brutus']
+
+print(friends_dict)
+
+friends_dict.clear()
+
+print(friends_dict)
