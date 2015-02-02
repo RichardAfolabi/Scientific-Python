@@ -32,37 +32,31 @@ that if the folder already exists, mkdir will raise an error if the folder
 doesn't get removed before being created again. To remove a folder, compare the
 following functions: `shutil.rmtree` and `os.rmdir`.
 """
+
 import shutil
 
 path_build = os.path.abspath(pathx) + '\\analysis'
+print path_build
 
-if os.path.exists(path_build):
-	existpth = raw_input("Path already exists. Delete and recreate? YES (Y) / No (N): ")
-	if str(existpth).capitalize() == 'Y':
-		os.remove(path_build)
-		print("Path removed")
-		os.mkdir(path_build)
-		print("Path recreated!")
-else:
-	os.mkdir(path_build)
-
-#%%
-try:
-	if os.path.exists(path_build):
-		existpth = raw_input("Path already exists. Delete and recreate? YES (Y) / No (N): ")
-		if str(existpth).capitalize() == 'Y':
-			shutil.rmtree(path_build)
-			#os.remove(path_build)
-			print("Path removed")
-			os.mkdir(path_build)
-			print("Path recreated!")
-	else:
-		os.mkdir(path_build)
-except Exception as excpt:
-	print('Error ', excpt)
+def pathfinder(mypath):
+	''' Create a new folder if not existing. Delete and recreate if existing'''
+	try:
+		if os.path.exists(mypath):
+			existpth = raw_input("Path already exists. Delete and recreate? YES(Y) / No(N): ")
+			if str(existpth).capitalize() == 'Y':
+				shutil.rmtree(mypath)
+				print("Path '\%s' removed " %os.path.basename(mypath))
+				os.mkdir(mypath)
+				print("\n Path '\%s' recreated!" %os.path.basename(mypath))
+			else:
+				print("\n\n Path '\%s' untouched!" %os.path.basename(mypath))
+		else:
+			print("\n\n Path does not exist. Path '\%s' will be created." %os.path.basename(mypath))
+			os.mkdir(mypath)
+	except Exception as excpt:
+		print ('Oopps... %s ' %excpt)
 	
-#shutil.rmtree()
-
+pathfinder(path_build)
 
 #%%
 """
@@ -71,28 +65,7 @@ described in the dictionary `contents` provided to you. Then, move all these
 files into the `analysis` folder. For this, the `copy` function of the module
 `shutil` will be useful.
 
-4. Print the absolute path of all the Python `.py` files in this `analysis`
-directory.
-
-Hint: Using IPython's ? to remind yourself of what exactly os.path.splitext
-returns.
-
-Bonus
-~~~~~
-Turn your script into a function that takes an arbitrary directory path
-and returns a list of Python files. Use it on the newly created analysis
-folder.
-
-Bonus Bonus
-~~~~~~~~~~~
-Let's do the same with a nice function of the os module: use os.walk to find
-all Python files contained in all subdirectories of the folder containing this
-current script. Again, test it on the analysis folder you created.
 """
-
-import os
-import shutil
-
 contents = {
     'data.csv': 'Date,High,Low,Close\n'
                 '4-Apr-2014,124,105,111\n'
@@ -108,5 +81,53 @@ contents = {
                   'scripts for analyzing them.\n',
 }
 
+curr_path = os.path.dirname(path_build)
 
-# your code goes here
+
+# Since 'contents' is a dictionary, we grab the keys, insert them into open statement in a loop.
+# Within the loop, we write the value of each key in the dictionary into the newly created file.
+
+try:
+	for key in contents.keys():
+		with open(key,'w') as fptr:
+			fptr.write(contents[key])
+			print("\n file '%s' created and populated." %key)
+except Exception as excpt:
+	print("scratching head... I'm confused!")
+
+
+#Required: Move all the newly created files into the 'analysis folder'. Since we have created a robust 
+# function for 'analysis', we just call it. Using for loop, we move the files and delete them from cwd. 
+
+pathfinder(path_build)
+
+for key in contents.keys():
+	shutil.copy(key,path_build)
+	os.remove(key)
+	print("\n File move for '%s' completed!" %key)
+	
+
+#%%
+
+"""
+
+4. Print the absolute path of all the Python `.py` files in this `analysis` directory.
+
+"""
+
+pycount = []
+def python_hunter(xpath):
+	""" Takes a path and return absolute dir of all Python files in the directory """
+	
+	for xfile in os.listdir(xpath):
+		if os.path.splitext(xfile)[1] == '.py':
+			pycount.append(os.path.abspath(xfile))
+	
+	print(pycount)
+	print("\n -- %d Python files found -- "% len(pycount))
+
+
+python_hunter(path_build)
+
+
+

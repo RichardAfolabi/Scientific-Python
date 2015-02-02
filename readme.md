@@ -1,5 +1,6 @@
 <h1>Training on Demand - Scientific Python</h1>
 
+This code is best evaluated and executed in Spyder  - bundled with Anaconda Python installation.
 
 <h2>Execises and code snippets</h2>
 =======
