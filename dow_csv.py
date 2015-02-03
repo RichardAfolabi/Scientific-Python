@@ -16,7 +16,7 @@ DATE        OPEN      HIGH      LOW       CLOSE     VOLUME      ADJ_CLOSE
 1. Read the data from the file, converting the fields to appropriate data types.
 
 """
-
+#%%
 import pandas
 
 try:
@@ -25,5 +25,4 @@ try:
 except Exception as excpt:
 	print("Error! %s " %excpt)
 	
-
 
