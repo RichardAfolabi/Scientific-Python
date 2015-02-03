@@ -1,6 +1,9 @@
-<h1>Training on Demand - Scientific Python</h1>
+<h1>Training on Demand - Scientific & Analytical Python</h1>
 
-This code is best evaluated and executed in Spyder  - bundled with Anaconda Python installation.
+These are codes and training exercises from the *[Enthought Training on Demand] (https://training.enthought.com/courses)* for Python.
+
+The codes are best evaluated and executed in Spyder  - bundled with Anaconda Python installation.
+
 
 <h2>Execises and code snippets</h2>
 =======
