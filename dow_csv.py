@@ -20,9 +20,10 @@ DATE        OPEN      HIGH      LOW       CLOSE     VOLUME      ADJ_CLOSE
 import pandas
 
 try:
-	pf_data = pandas.read_csv("dow2008.csv")
+	pf_data = pandas.read_csv("dow2008.csv", index_col=0)
 	print(pf_data)
 except Exception as excpt:
 	print("Error! %s " %excpt)
 	
+
 
