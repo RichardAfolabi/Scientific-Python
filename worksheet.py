@@ -13,7 +13,6 @@ alplist = ['c','a','t','d','o','g']
 
 random.shuffle(alplist)
 
-alplist.
 #%%
 
 def cls(): print "\n" *50          #Function to clear screen.
@@ -257,3 +256,44 @@ print('False' if k > 2 else 'True')
 print divmod(54,4)
 
 a,b,c = 3,4
+
+
+#%%
+
+import os
+from scipy import misc
+import matplotlib.pyplot as plt
+
+
+
+os.getcwd()
+babe = misc.imread("mygirl.jpg")
+#i = misc.imshow(babe)
+
+plt.imshow(babe)
+plt.show()
+
+#%%
+ import plotly.plotly as plt
+ from plotly.graph_objs import *
+ import numpy as np
+
+def g(x, y):
+    return (1 - x / 2 + x ** 5 + y ** 3) * np.exp(-x ** 2 -y ** 2)
+
+def f(x,y):
+    return (787.3 - (25*((334.3 + 31.5*x + x**2))/y**2) - 50*(0.5*(np.log(2) + np.log(np.pi) + np.log(y))))
+
+
+
+
+n = 150
+x = np.linspace(-20, -10, n)
+y = np.linspace(5, 15, n)
+X, Y = np.meshgrid(x, y)
+
+data = Data([Contour(x=x,y=y,z=f(X,Y))])
+plottx = plt.plot(data, filename='scontour')
+#plt.contourf(X, Y, f(X, Y), 50, alpha=0.5, cmap='Blues')
+#plt.contour(X, Y, f(X, Y), 11, colors='black', linewidth=.5)
+#plt.show()

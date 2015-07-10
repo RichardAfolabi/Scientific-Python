@@ -59,7 +59,7 @@ print(encoded_message)
 # 3) decode this message which has been encoded by this cypher
 secret_message = "ZIDRYX SC KGOCYWO"
 decoded_message = secret_message.translate(maketrans(shifted_letters,letters))
-print decoded_message
+print(decoded_message)
 
 
 #%%     # Bonus 
